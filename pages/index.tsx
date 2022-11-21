@@ -1,17 +1,18 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
-import { User } from "../types/user";
 import StyledHome from "./StyledHome";
+import { Classroom } from "../types/classroom";
 
 export default function Home() {
-  const [backendData, setBackendData] = useState<User[]>([]);
+  const [backendData, setBackendData] = useState<Classroom[]>([]);
 
   useEffect(() => {
-    fetch("/api")
+    fetch("/api/classrooms")
       .then((response) => response.json())
       .then((data) => {
         setBackendData(data);
+        console.log(data);
       });
   }, []);
   return (
@@ -30,7 +31,7 @@ export default function Home() {
           {typeof backendData === "undefined" ? (
             <p>Loading...</p>
           ) : (
-            backendData.map((user, i) => <p key={i}>{user.name}</p>)
+            backendData.map((classroom, i) => <p key={i}>{classroom.name}</p>)
           )}
         </div>
       </div>

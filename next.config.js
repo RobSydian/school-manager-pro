@@ -11,7 +11,7 @@ module.exports = () => {
     return [
       {
         source: "/api",
-        destination: "http://localhost:5000/api",
+        destination: "http://localhost:5000/api/classrooms",
       },
     ];
   };
