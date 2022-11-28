@@ -3,7 +3,10 @@ import React from "react";
 import StyledHeader from "./StyledHeader";
 
 export default function Header() {
-  const links = { name: "About", path: "/about" };
+  const links = [
+    { name: "About", path: "/about" },
+    { name: "Classrooms", path: "/classrooms" },
+  ];
   return (
     <StyledHeader>
       <div>
@@ -11,12 +14,11 @@ export default function Header() {
       </div>
       <nav>
         <ul>
-          <Link href={links.path}>
-            <li key={Math.random()}>{links.name}</li>
-          </Link>
-          <li>Link2</li>
-          <li>Link3</li>
-          <li>Link4</li>
+          {links.map((link) => (
+            <li key={Math.random()}>
+              <Link href={link.path}>{link.name}</Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </StyledHeader>

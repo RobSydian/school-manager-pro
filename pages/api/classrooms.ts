@@ -5,11 +5,7 @@ type Data = {
   name: string;
 };
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   console.log(req);
-
-  res.status(200).json({ name: "John Doe" });
+  res.status(200).json({ name: "Jane Doe" });
 }
