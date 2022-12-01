@@ -2,20 +2,11 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
 import StyledHome from "./StyledHome";
-import Classroom from "../types/classroom";
 
 export default function Home() {
-  const [backendData, setBackendData] = useState<Classroom[]>([]);
+  // const [backendData, setBackendData] = useState<Classroom[]>([]);
 
-  useEffect(() => {
-    // fetch("/api/classrooms")
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setBackendData(data);
-    //     console.log(data);
-    //   });
-    // setBackendData();
-  }, []);
+  useEffect(() => {}, []);
   return (
     <StyledHome>
       <div className={styles.container}>

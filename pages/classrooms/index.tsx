@@ -11,7 +11,6 @@ const Classroom: NextPage = () => {
   const fetchClassrooms = async () => {
     try {
       const response = await getClassrooms();
-      console.log(response);
       setClassrooms(response);
       setLoading(false);
     } catch (error) {
