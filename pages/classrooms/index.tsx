@@ -2,39 +2,33 @@ import { useEffect, useState } from "react";
 import Classroom from "../../types/classroom";
 import { NextPage } from "next";
 import { getClassrooms } from "../api/classrooms";
-// import Notification from "../../components/molecules/Notification";
-import { showNotification } from "../../utils/toastHandler";
+import { GetServerSideProps } from "next";
 
-const ClassroomPage: NextPage = () => {
+import { showNotification } from "../../utils/toastHandler";
+import CustomTable from "../../components/organisms/CustomTable";
+
+const ClassroomPage: NextPage = (props: any) => {
   const [classrooms, setClassrooms] = useState<Classroom[]>([]);
   const [loading, setLoading] = useState<Boolean>(true);
 
-  const fetchClassrooms = async () => {
-    try {
-      const response = await getClassrooms();
-      console.log(response);
-      setClassrooms(response);
-    } catch (error) {
+  useEffect(() => {
+    if (props.data) {
+      const { data } = props;
+      console.log(data);
+      setClassrooms(data);
+    } else {
       showNotification({
         message: "Classrooms can't be loaded at the moment.",
         type: "error",
       });
     }
+
     setLoading(false);
-  };
+  }, [props]);
 
-  useEffect(() => {
-    fetchClassrooms();
-  }, []);
-
-  const mappedClassrooms =
+  const classroomsTable =
     classrooms.length > 0 ? (
-      classrooms.map((classroom, i) => (
-        <div key={i} data-id={classroom.id}>
-          <h3>{classroom.name}</h3>
-          <p>{classroom.description}</p>
-        </div>
-      ))
+      <CustomTable headers={["name", "description"]} data={classrooms} />
     ) : (
       <p>No classrooms found</p>
     );
@@ -45,10 +39,24 @@ const ClassroomPage: NextPage = () => {
         <h1>Classrooms</h1>
       </div>
       <div className="container">
-        {loading ? <p>Loading...</p> : mappedClassrooms}
+        {loading ? <p>Loading...</p> : classroomsTable}
       </div>
     </>
   );
 };
 
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const data: Classroom[] = await getClassrooms();
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    return {
+      props: {
+        error: error.toString(),
+      },
+    };
+  }
+};
 export default ClassroomPage;

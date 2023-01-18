@@ -9,12 +9,7 @@ const StyledMain = styled.div`
 
   .main {
     min-height: 100vh;
-    padding: 4rem 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 2em;
   }
 
   @media (min-width: 600px) {
