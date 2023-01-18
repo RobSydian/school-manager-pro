@@ -2,15 +2,18 @@ import styled from "styled-components";
 
 const StyledHeaderItems = styled.ul`
   display: ${(props) => (props.isToggled ? "block" : "none")};
-
   position: absolute;
   top: 5em;
-  right: 1em;
+  right: 0;
   list-style: none;
-  width: 150px;
+  width: 50%;
+  z-index: 30;
+  background-color: white;
 
   a {
     padding: 0.5em;
+    /* TODO change font-size with globals */
+    font-size: 20px;
     text-transform: capitalize;
     display: flex;
     justify-content: space-evenly;
@@ -19,6 +22,7 @@ const StyledHeaderItems = styled.ul`
   .icon {
     padding-right: 0;
     margin-right: 0;
+    size: 20px;
   }
 
   @media (min-width: 821px) {
@@ -27,12 +31,13 @@ const StyledHeaderItems = styled.ul`
     justify-content: flex-end;
     align-items: center;
     gap: 1em;
+    width: 100%;
 
     li a {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 120px;
+      width: 135px;
     }
 
     .settings {

@@ -14,9 +14,13 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 export default function Header() {
   const [toggle, setToggle] = useState(false);
 
-  const iconSize = "20px";
+  const iconSize = "1em";
   const links = [
-    { name: "billing", path: "/billing", Icon: <GrMoney size={iconSize} /> },
+    {
+      name: "billing",
+      path: "/billing",
+      Icon: <GrMoney size={iconSize} />,
+    },
     {
       name: "subjects",
       path: "/subjects",
@@ -28,13 +32,21 @@ export default function Header() {
       path: "/students",
       Icon: <FaSeedling size={iconSize} />,
     },
-    { name: "teachers", path: "/teachers", Icon: <FaTree size={iconSize} /> },
+    {
+      name: "teachers",
+      path: "/teachers",
+      Icon: <FaTree size={iconSize} />,
+    },
     {
       name: "classes",
       path: "/classrooms",
       Icon: <FaDoorOpen size={iconSize} />,
     },
-    { name: "courses", path: "/courses", Icon: <ImBooks size={iconSize} /> },
+    {
+      name: "courses",
+      path: "/courses",
+      Icon: <ImBooks size={iconSize} />,
+    },
     {
       name: "settings",
       path: "/settings",
