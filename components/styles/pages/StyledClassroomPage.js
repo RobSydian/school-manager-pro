@@ -25,7 +25,7 @@ const StyledClassroomPage = styled.div`
 
   @media (min-width: 821px) {
     .container__content {
-      max-width: 40%;
+      width: 60%;
     }
   }
 `;

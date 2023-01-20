@@ -12,7 +12,7 @@ const StyledMain = styled.div`
     padding: 0.5em;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 821px) {
     .main {
       padding: 2em;
     }

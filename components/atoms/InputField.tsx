@@ -1,4 +1,4 @@
-import StyledInput from "../styles/atoms/StyledInput";
+import StyledInputField from "../styles/atoms/StyledInputField";
 type Props = {
   type: string;
   content: string;
@@ -7,9 +7,9 @@ type Props = {
 
 export default function InputField({ type, content, name }: Props) {
   return (
-    <StyledInput>
+    <StyledInputField>
       <label htmlFor={name}>{content}</label>
       <input name={name} id={name} type={type} />
-    </StyledInput>
+    </StyledInputField>
   );
 }
