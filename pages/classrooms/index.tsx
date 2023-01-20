@@ -32,9 +32,11 @@ const ClassroomPage: NextPage = (props: any) => {
 
     setLoading(false);
   }, [props]);
+
   const openForm = () => {
     setShowForm(!showForm);
   };
+
   const classroomsTable =
     classrooms.length > 0 ? (
       <CustomTable headers={["name", "description"]} data={classrooms} />
@@ -55,13 +57,19 @@ const ClassroomPage: NextPage = (props: any) => {
         </div>
         <div className="container__content">
           {/* Form: Create classroom */}
-          <Form submitFn={() => alert("hi!")}>
-            <InputField type="text" content="Name" name="name" />
-            <InputField type="text" content="Description" name="description" />
-            <ButtonContainer>
-              <Button content="Send" classtype="submit" />
-            </ButtonContainer>
-          </Form>
+          {showForm && (
+            <Form submitFn={() => alert("hi!")}>
+              <InputField type="text" content="Name" name="name" />
+              <InputField
+                type="text"
+                content="Description"
+                name="description"
+              />
+              <ButtonContainer>
+                <Button content="Send" classtype="submit" />
+              </ButtonContainer>
+            </Form>
+          )}
           {loading ? <p>Loading...</p> : classroomsTable}
         </div>
       </div>
