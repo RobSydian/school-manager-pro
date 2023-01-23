@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import Classroom from "../../types/classroom";
 import { NextPage } from "next";
 import StyledClassroomPage from "../../components/styles/pages/StyledClassroomPage";
-import { getClassrooms, createClassroom } from "../api/classrooms";
+import {
+  getClassrooms,
+  createClassroom,
+  deleteClassroom,
+} from "../api/classrooms";
 import { GetServerSideProps } from "next";
 
 import { showNotification } from "../../utils/toastHandler";
@@ -40,31 +44,60 @@ const ClassroomPage: NextPage = (props: any) => {
   useEffect(() => {
     console.log("second useEffect");
     loadData();
+    setAlteredTable(false);
   }, [alteredTable]);
+
   const openForm = () => {
     setShowForm(!showForm);
   };
 
   const submitHandler = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
+    setAlteredTable(false);
+
     const newClassroom: Classroom = {
       name: nameInput,
       description: descriptionInput,
     };
-    createClassroom(newClassroom);
+    const res = await createClassroom(newClassroom);
+    if (res.status < 300) {
+      showNotification({
+        message: "Classroom added to list",
+        type: "success",
+      });
+    }
     setAlteredTable(true);
     setShowForm(false);
   };
 
+  const deleteClassroomAction = async (id: string) => {
+    console.log("inside delete");
+    console.log(alteredTable);
+
+    // setAlteredTable(false);
+    const res = await deleteClassroom(id);
+    if (res.status < 300) {
+      showNotification({
+        message: "Classroom successfully deleted from list",
+        type: "success",
+      });
+    }
+    setAlteredTable(true);
+    console.log("second alteredTable", alteredTable);
+  };
+
   const classroomsTable =
     classrooms.length > 0 ? (
-      <CustomTable headers={["name", "description"]} data={classrooms} />
+      <CustomTable
+        headers={["name", "description"]}
+        data={classrooms}
+        deleteFn={deleteClassroomAction}
+      />
     ) : (
       <p>No classrooms found</p>
     );
 
   function getInputRef(fieldInput: string, name: string): Classroom {
-    console.log({ fieldInput, name });
     name === "name"
       ? setNameInput(fieldInput)
       : setDescriptionInput(fieldInput);

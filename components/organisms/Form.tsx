@@ -6,7 +6,6 @@ type Props = {
 };
 
 export default function Form({ submitFn, children }: Props) {
-  console.log(submitFn);
   return (
     <StyledForm>
       <form className="form" onSubmit={submitFn}>

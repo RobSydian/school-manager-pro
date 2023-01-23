@@ -29,3 +29,16 @@ export async function createClassroom(classroom: Classroom) {
     throw Error(error.message);
   }
 }
+
+export async function deleteClassroom(id: string) {
+  try {
+    const response = await fetch(`${BASE_URL}/classrooms/${id}`, {
+      method: "DELETE",
+      headers: headers,
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    throw Error(error.message);
+  }
+}
