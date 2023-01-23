@@ -13,6 +13,10 @@ const StyledButton = styled.div`
   .submit {
     background-color: purple;
   }
+
+  .submit:hover {
+    background-color: magenta;
+  }
 `;
 
 export default StyledButton;

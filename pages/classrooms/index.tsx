@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Classroom from "../../types/classroom";
 import { NextPage } from "next";
 import StyledClassroomPage from "../../components/styles/pages/StyledClassroomPage";
-import { getClassrooms } from "../api/classrooms";
+import { getClassrooms, createClassroom } from "../api/classrooms";
 import { GetServerSideProps } from "next";
 
 import { showNotification } from "../../utils/toastHandler";
@@ -14,16 +14,20 @@ import Button from "../../components/atoms/Button";
 import ButtonContainer from "../../components/molecules/ButtonContainer";
 
 const ClassroomPage: NextPage = (props: any) => {
-  const [classrooms, setClassrooms] = useState<Classroom[]>([]);
+  const [classrooms, setClassrooms] = useState<Classroom[]>(props.data);
   const [loading, setLoading] = useState<Boolean>(true);
   const [showForm, setShowForm] = useState<Boolean>(false);
+  const [nameInput, setNameInput] = useState<string>();
+  const [descriptionInput, setDescriptionInput] = useState<string>();
+  const [alteredTable, setAlteredTable] = useState<Boolean>(false);
+
+  const loadData = async () => {
+    const data: Classroom[] = await getClassrooms();
+    setClassrooms(data);
+  };
 
   useEffect(() => {
-    if (props.data) {
-      const { data } = props;
-      console.log(data);
-      setClassrooms(data);
-    } else {
+    if (!props.data) {
       showNotification({
         message: "Classrooms can't be loaded at the moment.",
         type: "error",
@@ -33,8 +37,23 @@ const ClassroomPage: NextPage = (props: any) => {
     setLoading(false);
   }, [props]);
 
+  useEffect(() => {
+    console.log("second useEffect");
+    loadData();
+  }, [alteredTable]);
   const openForm = () => {
     setShowForm(!showForm);
+  };
+
+  const submitHandler = async (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const newClassroom: Classroom = {
+      name: nameInput,
+      description: descriptionInput,
+    };
+    createClassroom(newClassroom);
+    setAlteredTable(true);
+    setShowForm(false);
   };
 
   const classroomsTable =
@@ -43,6 +62,14 @@ const ClassroomPage: NextPage = (props: any) => {
     ) : (
       <p>No classrooms found</p>
     );
+
+  function getInputRef(fieldInput: string, name: string): Classroom {
+    console.log({ fieldInput, name });
+    name === "name"
+      ? setNameInput(fieldInput)
+      : setDescriptionInput(fieldInput);
+    return { fieldInput, name };
+  }
 
   return (
     <StyledClassroomPage>
@@ -58,15 +85,21 @@ const ClassroomPage: NextPage = (props: any) => {
         <div className="container__content">
           {/* Form: Create classroom */}
           {showForm && (
-            <Form submitFn={() => alert("hi!")}>
-              <InputField type="text" content="Name" name="name" />
+            <Form submitFn={submitHandler}>
+              <InputField
+                type="text"
+                content="Name"
+                name="name"
+                getInputRef={getInputRef}
+              />
               <InputField
                 type="text"
                 content="Description"
                 name="description"
+                getInputRef={getInputRef}
               />
               <ButtonContainer>
-                <Button content="Send" classtype="submit" />
+                <Button btnType="submit" content="Send" classtype="submit" />
               </ButtonContainer>
             </Form>
           )}
