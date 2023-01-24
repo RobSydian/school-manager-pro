@@ -7,7 +7,7 @@ const StyledForm = styled.div`
   .form {
     padding: 1em;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1em;
     flex-wrap: wrap;
   }

@@ -12,7 +12,11 @@ const StyledCustomTable = styled.table`
     padding: 0.7em;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    min-width: 150px;
+    min-width: 140px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px;
   }
 
   th {

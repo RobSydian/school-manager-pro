@@ -24,11 +24,16 @@ const StyledClassroomPage = styled.div`
     min-width: 450px;
   }
 
-  /* @media (min-width: 821px) {
-    .container__content {
-      /* width: 95%; */
-  /* } */
-  /* }  */
+  .container__content {
+    padding: 1em 0;
+    min-width: 450px;
+  }
+
+  @media (min-width: 821px) {
+    .container__content__form {
+      width: 50%;
+    }
+  }
 `;
 
 export default StyledClassroomPage;

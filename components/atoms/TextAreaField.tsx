@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import StyledInputField from "../styles/atoms/StyledInputField";
+import StyledTextAreaField from "../styles/atoms/StyledTextAreaField";
 type Props = {
   type: string;
   content: string;
@@ -7,26 +7,27 @@ type Props = {
   getInputRef: (x: string, y: string) => {};
 };
 
-export default function InputField({
+export default function TextAreaField({
   type,
   content,
   name,
   getInputRef,
 }: Props) {
-  const inputRef = useRef("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <StyledInputField>
+    <StyledTextAreaField>
       <label htmlFor={name}>{content}</label>
-      <input
+      <textarea
         name={name}
         id={name}
         type={type}
+        rows={1}
         ref={inputRef}
         onChange={() => {
           getInputRef(inputRef.current.value, name);
         }}
       />
-    </StyledInputField>
+    </StyledTextAreaField>
   );
 }

@@ -16,6 +16,7 @@ import InputField from "../../components/atoms/InputField";
 import Form from "../../components/organisms/Form";
 import Button from "../../components/atoms/Button";
 import ButtonContainer from "../../components/molecules/ButtonContainer";
+import TextAreaField from "../../components/atoms/TextAreaField";
 
 const ClassroomPage: NextPage = (props: any) => {
   const [classrooms, setClassrooms] = useState<Classroom[]>(props.data);
@@ -117,25 +118,27 @@ const ClassroomPage: NextPage = (props: any) => {
         </div>
         <div className="container__content">
           {/* Form: Create classroom */}
-          {showForm && (
-            <Form submitFn={submitHandler}>
-              <InputField
-                type="text"
-                content="Name"
-                name="name"
-                getInputRef={getInputRef}
-              />
-              <InputField
-                type="text"
-                content="Description"
-                name="description"
-                getInputRef={getInputRef}
-              />
-              <ButtonContainer>
-                <Button btnType="submit" content="Send" classtype="submit" />
-              </ButtonContainer>
-            </Form>
-          )}
+          <div className="container__content__form">
+            {showForm && (
+              <Form submitFn={submitHandler}>
+                <InputField
+                  type="text"
+                  content="Name"
+                  name="name"
+                  getInputRef={getInputRef}
+                />
+                <TextAreaField
+                  type="text"
+                  content="Description"
+                  name="description"
+                  getInputRef={getInputRef}
+                />
+                <ButtonContainer>
+                  <Button btnType="submit" content="Send" classtype="submit" />
+                </ButtonContainer>
+              </Form>
+            )}
+          </div>
           {loading ? <p>Loading...</p> : classroomsTable}
         </div>
       </div>
