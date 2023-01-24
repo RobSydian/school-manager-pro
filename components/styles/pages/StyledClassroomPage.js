@@ -21,13 +21,14 @@ const StyledClassroomPage = styled.div`
 
   .container__content {
     padding: 1em 0;
+    min-width: 450px;
   }
 
-  @media (min-width: 821px) {
+  /* @media (min-width: 821px) {
     .container__content {
-      width: 60%;
-    }
-  }
+      /* width: 95%; */
+  /* } */
+  /* }  */
 `;
 
 export default StyledClassroomPage;

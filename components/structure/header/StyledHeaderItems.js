@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledHeaderItems = styled.ul`
   display: ${(props) => (props.isToggled ? "block" : "none")};
-  position: absolute;
+  position: fixed;
   top: 5em;
   right: 0;
   list-style: none;

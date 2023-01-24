@@ -16,17 +16,33 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     color-scheme: dark light;
+    -webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+  }
+
+  html,
+  body,
+  body > div:first-child,
+  div#__next,
+  div#__next > div {
+    height: 100%;
   }
 
   body {
-    min-height: 100vh;
+    height: 100vh;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     margin: 0;
     padding: 0;
     font-family: Helvetica, Sans-Serif;
   }
+  body, html, #__next{
+    margin:0;
+    padding:0;
+    min-width: 500px;
 
+}
   img,
   picture,
   svg,
