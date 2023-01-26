@@ -11,6 +11,7 @@ const StyledMain = styled.div`
   .main {
     min-height: 100vh;
     padding: 0.5em;
+    background-color: var(--white-bg);
   }
 
   @media (min-width: 821px) {

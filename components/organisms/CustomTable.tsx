@@ -6,6 +6,7 @@ import StyledCustomTable from "../styles/organisms/StyledCustomTable";
 type TableProps = {
   headers: string[];
   data: Classroom[];
+  hasOptions: boolean;
   deleteFn: (id: string) => Promise<void>;
   getSelectedRowData: (data: Object) => {};
 };
@@ -14,6 +15,7 @@ export default function CustomTable({
   headers,
   data,
   deleteFn,
+  hasOptions,
   getSelectedRowData,
 }: TableProps) {
   return (
@@ -23,6 +25,7 @@ export default function CustomTable({
           {headers.map((header) => {
             return <th key={header}>{header}</th>;
           })}
+          {hasOptions && <th></th>}
         </tr>
         {data.map((tData) => {
           function displayData(): any {
@@ -32,15 +35,17 @@ export default function CustomTable({
             <tr key={tData._id}>
               <td title={tData.name}>{tData.name}</td>
               <td title={tData.description}>{tData.description}</td>
-              <td className="actionsCol">
-                <DataActions
-                  displayData={() => displayData()}
-                  id={tData._id}
-                  deleteFn={() => deleteFn(tData._id)}
-                  deletable
-                  editable
-                />
-              </td>
+              {hasOptions && (
+                <td className="actionsCol">
+                  <DataActions
+                    displayData={() => displayData()}
+                    id={tData._id}
+                    deleteFn={() => deleteFn(tData._id)}
+                    deletable
+                    editable
+                  />
+                </td>
+              )}
             </tr>
           );
         })}

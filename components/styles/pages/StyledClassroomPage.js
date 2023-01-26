@@ -14,7 +14,7 @@ const StyledClassroomPage = styled.div`
   }
 
   .container__title__icon:hover {
-    background-color: grey;
+    background-color: var(--dark);
     border-radius: 25px;
     color: white;
   }

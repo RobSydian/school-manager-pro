@@ -4,6 +4,7 @@ const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--dark);
 
   .logo {
     width: 15%;

@@ -8,7 +8,8 @@ const StyledHeaderItems = styled.ul`
   list-style: none;
   width: 50%;
   z-index: 30;
-  background-color: white;
+  background-color: var(--dark);
+  color: var(--white);
 
   a {
     padding: 0.5em;
@@ -24,6 +25,14 @@ const StyledHeaderItems = styled.ul`
     margin-right: 0;
     size: 20px;
   }
+  .icon svg,
+  .settings {
+    color: var(--contrast);
+  }
+  /* a,
+  .icon {
+    color: var(--white);
+  } */
 
   @media (min-width: 821px) {
     display: ${(props) => (props.isToggled ? "flex" : "flex")};
@@ -32,6 +41,7 @@ const StyledHeaderItems = styled.ul`
     align-items: center;
     gap: 1em;
     width: 100%;
+    background-color: transparent;
 
     li a {
       display: flex;

@@ -150,6 +150,7 @@ const ClassroomPage: NextPage = (props: any) => {
         data={classrooms}
         deleteFn={deleteClassroomAction}
         getSelectedRowData={getSelectedRowData}
+        hasOptions={true}
       />
     ) : (
       <p>No classrooms found</p>

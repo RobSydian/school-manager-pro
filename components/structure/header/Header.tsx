@@ -6,8 +6,9 @@ import StyledHeader from "./StyledHeader";
 import Image from "next/image";
 
 import { FaDoorOpen, FaSeedling, FaTree } from "react-icons/fa";
-import { GrMoney } from "react-icons/gr";
+// import { GrMoney } from "react-icons/gr";
 import { IoIosBook, IoMdSettings } from "react-icons/io";
+import { BsPiggyBankFill } from "react-icons/bs";
 import { ImBooks } from "react-icons/im";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
@@ -19,7 +20,7 @@ export default function Header() {
     {
       name: "billing",
       path: "/billing",
-      Icon: <GrMoney size={iconSize} />,
+      Icon: <BsPiggyBankFill size={iconSize} />,
     },
     {
       name: "subjects",
