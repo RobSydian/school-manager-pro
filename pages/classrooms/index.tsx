@@ -6,6 +6,7 @@ import {
   getClassrooms,
   createClassroom,
   deleteClassroom,
+  editClassroom,
 } from "../api/classrooms";
 import { GetServerSideProps } from "next";
 
@@ -22,9 +23,12 @@ const ClassroomPage: NextPage = (props: any) => {
   const [classrooms, setClassrooms] = useState<Classroom[]>(props.data);
   const [loading, setLoading] = useState<Boolean>(true);
   const [showForm, setShowForm] = useState<Boolean>(false);
-  const [nameInput, setNameInput] = useState<string>();
-  const [descriptionInput, setDescriptionInput] = useState<string>();
+  const [showEditForm, setShowEditForm] = useState<Boolean>(false);
+  const [nameInput, setNameInput] = useState<string>("");
+  const [descriptionInput, setDescriptionInput] = useState<string>("");
+  const [selectedRowId, setSelectedRowId] = useState<string>("");
   const [alteredTable, setAlteredTable] = useState<Boolean>(false);
+  const [selectedRowData, setSelectedRowData] = useState<Object>();
 
   const loadData = async () => {
     const data: Classroom[] = await getClassrooms();
@@ -43,13 +47,13 @@ const ClassroomPage: NextPage = (props: any) => {
   }, [props]);
 
   useEffect(() => {
-    console.log("second useEffect");
     loadData();
     setAlteredTable(false);
   }, [alteredTable]);
 
   const openForm = () => {
     setShowForm(!showForm);
+    setShowEditForm(false);
   };
 
   const submitHandler = async (e: React.FormEvent<HTMLInputElement>) => {
@@ -71,6 +75,37 @@ const ClassroomPage: NextPage = (props: any) => {
     setShowForm(false);
   };
 
+  // TODO
+  const submitEditHandler = async (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    console.log("ho!");
+    // setAlteredTable(false);
+    console.log({ name: nameInput, description: descriptionInput });
+
+    const editedClassroom: Classroom = {
+      _id: selectedRowId,
+      name: nameInput,
+      description: descriptionInput,
+    };
+    console.log(editedClassroom);
+
+    const res = await editClassroom(editedClassroom?._id, editedClassroom);
+    if (res.status < 300) {
+      showNotification({
+        message: "Classroom edited successfully",
+        type: "success",
+      });
+    } else {
+      showNotification({
+        message: "Something went wrong!",
+        type: "error",
+      });
+    }
+
+    setAlteredTable(true);
+    setShowEditForm(false);
+  };
+
   const deleteClassroomAction = async (id: string) => {
     console.log("inside delete");
     console.log(alteredTable);
@@ -87,18 +122,42 @@ const ClassroomPage: NextPage = (props: any) => {
     console.log("second alteredTable", alteredTable);
   };
 
+  function onRowSelect() {
+    console.log({ nameInput });
+    console.log({ descriptionInput });
+    console.log({ selectedRowData });
+    setShowEditForm(false);
+  }
+
+  function getSelectedRowData(data: Object): any {
+    console.log({ data });
+    setSelectedRowId(data?._id);
+    setNameInput(data?.name);
+    setDescriptionInput(data?.description);
+
+    if (showForm) {
+      setShowForm(false);
+    }
+    setShowEditForm(!showEditForm);
+
+    setSelectedRowData(data);
+  }
+
   const classroomsTable =
     classrooms.length > 0 ? (
       <CustomTable
         headers={["name", "description"]}
         data={classrooms}
         deleteFn={deleteClassroomAction}
+        getSelectedRowData={getSelectedRowData}
       />
     ) : (
       <p>No classrooms found</p>
     );
 
   function getInputRef(fieldInput: string, name: string): Classroom {
+    // resetInputs();
+
     name === "name"
       ? setNameInput(fieldInput)
       : setDescriptionInput(fieldInput);
@@ -124,17 +183,64 @@ const ClassroomPage: NextPage = (props: any) => {
                 <InputField
                   type="text"
                   content="Name"
+                  defaultValue=""
+                  placeholder=""
                   name="name"
+                  getInputRef={getInputRef}
+                />
+                <TextAreaField
+                  type="text"
+                  defaultValue=""
+                  content="Description"
+                  placeholder=""
+                  name="description"
+                  getInputRef={getInputRef}
+                />
+                <ButtonContainer>
+                  <Button
+                    btnType="submit"
+                    content="Send"
+                    classtype="submit"
+                    isDisabled={
+                      nameInput === "" || descriptionInput === "" ? true : false
+                    }
+                    onClickFn={() => {}}
+                  />
+                </ButtonContainer>
+              </Form>
+            )}
+            {showEditForm && (
+              <Form submitFn={submitEditHandler}>
+                <InputField
+                  type="text"
+                  content="Name"
+                  name="name"
+                  defaultValue={`${selectedRowData?.name}`}
+                  placeholder={`${selectedRowData?.name}`}
                   getInputRef={getInputRef}
                 />
                 <TextAreaField
                   type="text"
                   content="Description"
                   name="description"
+                  defaultValue={`${selectedRowData?.description}`}
+                  placeholder={`${selectedRowData?.description}`}
                   getInputRef={getInputRef}
                 />
                 <ButtonContainer>
-                  <Button btnType="submit" content="Send" classtype="submit" />
+                  <Button
+                    btnType="button"
+                    content="Cancel"
+                    classtype="cancel"
+                    onClickFn={() => onRowSelect()}
+                  />
+                  <Button
+                    btnType="submit"
+                    content="Update"
+                    isDisabled={false}
+                    classtype="update"
+                    onClickFn={() => {}}
+                  />
                 </ButtonContainer>
               </Form>
             )}

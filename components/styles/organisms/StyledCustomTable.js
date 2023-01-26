@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
-const StyledCustomTable = styled.table`
-  margin: 0;
-  padding: 0;
-  min-width: 100%;
-  border: 1px solid black;
-  overflow: scroll;
+const StyledCustomTable = styled.div`
+  min-width: 500px;
+  /* overflow-y: scroll; */
+
+  table {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: 1px solid black;
+  }
 
   td,
   th {
@@ -16,7 +20,7 @@ const StyledCustomTable = styled.table`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 150px;
+    max-width: 200px;
   }
 
   th {
@@ -24,9 +28,13 @@ const StyledCustomTable = styled.table`
     text-transform: uppercase;
   }
 
-  /* @media (min-width: 821px) {
-    min-width: 20%;
-  } */
+  .actionsCol {
+    /* max-width: 200px; */
+  }
+
+  @media (min-width: 821px) {
+    /* min-width: 20%; */
+  }
 `;
 
 export default StyledCustomTable;

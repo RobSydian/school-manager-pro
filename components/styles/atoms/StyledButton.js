@@ -10,12 +10,33 @@ const StyledButton = styled.div`
     border: none;
   }
 
-  .submit {
-    background-color: purple;
+  button:disabled,
+  button[disabled],
+  button:disabled:hover {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
   }
 
-  .submit:hover {
-    background-color: magenta;
+  .submit {
+    background-color: purple;
+    &:hover {
+      background-color: magenta;
+    }
+  }
+
+  .update {
+    background-color: darkblue;
+    &:hover {
+      background-color: blue;
+    }
+  }
+
+  .cancel {
+    background-color: darkgrey;
+    &:hover {
+      background-color: grey;
+    }
   }
 `;
 

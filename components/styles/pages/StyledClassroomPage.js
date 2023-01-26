@@ -22,11 +22,7 @@ const StyledClassroomPage = styled.div`
   .container__content {
     padding: 1em 0;
     min-width: 450px;
-  }
-
-  .container__content {
-    padding: 1em 0;
-    min-width: 450px;
+    overflow: auto;
   }
 
   @media (min-width: 821px) {

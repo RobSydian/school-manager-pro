@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Classroom from "../../types/classroom";
 import DataActions from "../molecules/DataActions";
 import StyledCustomTable from "../styles/organisms/StyledCustomTable";
@@ -6,36 +6,45 @@ import StyledCustomTable from "../styles/organisms/StyledCustomTable";
 type TableProps = {
   headers: string[];
   data: Classroom[];
-  // editFn: () => {};
-  deleteFn: () => {};
+  deleteFn: (id: string) => Promise<void>;
+  getSelectedRowData: (data: Object) => {};
 };
 
-export default function CustomTable({ headers, data, deleteFn }: TableProps) {
-  console.log(data);
+export default function CustomTable({
+  headers,
+  data,
+  deleteFn,
+  getSelectedRowData,
+}: TableProps) {
   return (
     <StyledCustomTable>
-      <tr>
-        {headers.map((header) => {
-          return <th key={header}>{header}</th>;
+      <table>
+        <tr>
+          {headers.map((header) => {
+            return <th key={header}>{header}</th>;
+          })}
+        </tr>
+        {data.map((tData) => {
+          function displayData(): any {
+            getSelectedRowData(tData);
+          }
+          return (
+            <tr key={tData._id}>
+              <td title={tData.name}>{tData.name}</td>
+              <td title={tData.description}>{tData.description}</td>
+              <td className="actionsCol">
+                <DataActions
+                  displayData={() => displayData()}
+                  id={tData._id}
+                  deleteFn={() => deleteFn(tData._id)}
+                  deletable
+                  editable
+                />
+              </td>
+            </tr>
+          );
         })}
-      </tr>
-      {data.map((tData) => {
-        return (
-          <tr key={tData._id}>
-            <td>{tData.name}</td>
-            <td>{tData.description}</td>
-            <td>
-              <DataActions
-                id={tData._id}
-                deleteFn={() => deleteFn(tData._id)}
-                editable
-                deletable
-              />
-            </td>
-            {/* <td>{tData._id}</td> */}
-          </tr>
-        );
-      })}
+      </table>
     </StyledCustomTable>
   );
 }

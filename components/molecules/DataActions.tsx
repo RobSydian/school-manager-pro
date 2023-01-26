@@ -1,33 +1,35 @@
 // import { FiEdit2 } from "react-icons/fi";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiOutlineSearch } from "react-icons/ai";
+import StyledDataActions from "../styles/molecules/StyledDataActions";
 
 type Props = {
   id: string;
-  editable: boolean;
   deletable: boolean;
-  //   editFn: (id: string) => {};
+  editable: boolean;
+  displayData: () => {};
   deleteFn: (id: string) => void;
 };
 
 export default function DataActions({
   id,
-  //   editable = true,
   deletable = true,
-  //   editFn,
+  editable = true,
+  displayData,
   deleteFn,
 }: Props) {
+  const iconSize = "1.5em";
   return (
-    <div className="actions-container">
-      {/* {editable && (
-        <span onClick={() => editFn(id)}>
-          <FiEdit2 />
-        </span>
-      )} */}
-      {deletable && (
-        <span onClick={() => deleteFn(id)}>
-          <AiFillDelete />
+    <StyledDataActions>
+      {editable && (
+        <span onClick={displayData}>
+          <AiOutlineSearch size={iconSize} className="searchIcon" />
         </span>
       )}
-    </div>
+      {deletable && (
+        <span onClick={() => deleteFn(id)}>
+          <AiFillDelete size={iconSize} className="deleteIcon" />
+        </span>
+      )}
+    </StyledDataActions>
   );
 }
