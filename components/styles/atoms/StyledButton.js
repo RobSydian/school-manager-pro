@@ -26,9 +26,9 @@ const StyledButton = styled.div`
   }
 
   .update {
-    background-color: darkblue;
+    background-color: var(--blue);
     &:hover {
-      background-color: blue;
+      background-color: var(--blue-hover);
     }
   }
 

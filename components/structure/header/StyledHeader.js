@@ -7,13 +7,24 @@ const StyledHeader = styled.div`
   background-color: var(--dark);
 
   .logo {
-    width: 15%;
-    margin-left: 2em;
+    width: 70%;
+    padding-left: 2em;
+    /* background-color:  */
+    background-image: linear-gradient(to right, black, var(--dark));
+  }
+
+  .logo h1 {
+    font-family: "Bebas Neue", cursive;
+    color: var(--white);
   }
 
   nav {
     max-width: 70%;
     margin-right: 2em;
+  }
+
+  .menu-button {
+    color: var(--contrast);
   }
 
   @media (min-width: 821px) {
@@ -22,8 +33,8 @@ const StyledHeader = styled.div`
     }
 
     .logo {
-      width: 10%;
-      margin-left: 2em;
+      width: 20%;
+      padding-left: 2em;
     }
 
     nav {

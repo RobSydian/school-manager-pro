@@ -6,18 +6,19 @@ const StyledHeaderItems = styled.ul`
   top: 5em;
   right: 0;
   list-style: none;
-  width: 50%;
+  width: 18em;
   z-index: 30;
   background-color: var(--dark);
   color: var(--white);
 
   a {
-    padding: 0.5em;
+    margin: 1em 2em;
     /* TODO change font-size with globals */
     font-size: 20px;
     text-transform: capitalize;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
+    gap: 2em;
   }
 
   .icon {
@@ -29,6 +30,11 @@ const StyledHeaderItems = styled.ul`
   .settings {
     color: var(--contrast);
   }
+
+  .settings {
+    display: flex;
+    justify-content: center;
+  }
   /* a,
   .icon {
     color: var(--white);
@@ -39,7 +45,7 @@ const StyledHeaderItems = styled.ul`
     position: static;
     justify-content: flex-end;
     align-items: center;
-    gap: 1em;
+    gap: 0;
     width: 100%;
     background-color: transparent;
 
@@ -47,11 +53,19 @@ const StyledHeaderItems = styled.ul`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 135px;
+      /* width: 150px; */
+      margin: 0 0.4em;
+      /* TODO change font-size with globals */
+      gap: 0.5em;
+    }
+
+    .icon {
+      size: 35px;
     }
 
     .settings {
       width: 50px;
+      /* display: block; */
     }
   }
 `;

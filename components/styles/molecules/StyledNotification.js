@@ -12,19 +12,19 @@ const StyledNotification = styled.div`
   z-index: 20;
 
   &&.success {
-    background-color: green;
+    background-color: var(--green);
   }
 
   &&.warning {
-    background-color: yellow;
+    background-color: var(--orange);
   }
 
   &&.error {
-    background-color: red;
+    background-color: var(--red);
   }
 
   &&.info {
-    background-color: blue;
+    background-color: var(--blue);
   }
 `;
 

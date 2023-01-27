@@ -61,12 +61,13 @@ export default function Header() {
   return (
     <StyledHeader>
       <Link href="/" className="logo">
-        <Image
+        <h1>School Name</h1>
+        {/* <Image
           src="/images/school-logo.png"
           width={80}
           height={80}
           alt="school logo"
-        />
+        /> */}
       </Link>
       <nav>
         {!toggle ? (

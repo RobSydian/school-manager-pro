@@ -6,15 +6,15 @@ const StyledDataActions = styled.div`
   gap: 2;
 
   .deleteIcon {
-    color: darkred;
+    color: var(--red);
     &:hover {
-      color: red;
+      color: var(--red-hover);
     }
   }
   .searchIcon {
-    color: darkblue;
+    color: var(--blue);
     &:hover {
-      color: blue;
+      color: var(--blue-hover);
     }
   }
 `;

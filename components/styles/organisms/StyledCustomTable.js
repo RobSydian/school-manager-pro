@@ -28,12 +28,11 @@ const StyledCustomTable = styled.div`
     text-transform: uppercase;
   }
 
-  .actionsCol {
-    /* max-width: 200px; */
-  }
-
   @media (min-width: 821px) {
     min-width: 20%;
+  }
+  .actionsCol {
+    width: 15em;
   }
 `;
 
