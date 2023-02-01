@@ -1,14 +1,14 @@
 import Classroom from "../../types/classroom";
 import BASE_URL from "../../utils/baseUrl";
-
+import axios from "axios";
 const headers = {
   "Content-Type": "application/json",
 };
 
 export async function getClassrooms() {
   try {
-    const classrooms = await fetch(`${BASE_URL}/classrooms`);
-    const data = await classrooms.json();
+    const { data } = await axios.get(`${BASE_URL}/classrooms`);
+    console.log(data);
     return data;
   } catch (error) {
     throw Error(error);
@@ -28,6 +28,9 @@ export async function createClassroom(classroom: Classroom) {
   }
 }
 
+////
+
+///
 export async function deleteClassroom(id: string) {
   try {
     const response = await fetch(`${BASE_URL}/classrooms/${id}`, {

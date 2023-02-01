@@ -144,7 +144,7 @@ const ClassroomPage: NextPage = (props: any) => {
   }
 
   const classroomsTable =
-    classrooms.length > 0 ? (
+    classrooms?.length > 0 ? (
       <CustomTable
         headers={["name", "description"]}
         data={classrooms}
@@ -233,6 +233,7 @@ const ClassroomPage: NextPage = (props: any) => {
                     btnType="button"
                     content="Cancel"
                     classtype="cancel"
+                    isDisabled={false}
                     onClickFn={() => onRowSelect()}
                   />
                   <Button
@@ -253,7 +254,7 @@ const ClassroomPage: NextPage = (props: any) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const data: Classroom[] = await getClassrooms();
     return {
