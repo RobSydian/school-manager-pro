@@ -20,35 +20,43 @@ export default function CustomTable({
 }: TableProps) {
   return (
     <StyledCustomTable>
-      <table>
-        <tr>
-          {headers.map((header) => {
-            return <th key={header}>{header}</th>;
+      <table className="customTable" title="customTable">
+        <thead title="theader">
+          <tr>
+            {headers.map((header) => {
+              return (
+                <th role="headerRow" key={header}>
+                  {header}
+                </th>
+              );
+            })}
+            {hasOptions && <th></th>}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((tData) => {
+            function displayData(): any {
+              getSelectedRowData(tData);
+            }
+            return (
+              <tr key={tData._id}>
+                <td title={tData.name}>{tData.name}</td>
+                <td title={tData.description}>{tData.description}</td>
+                {hasOptions && (
+                  <td className="actionsCol">
+                    <DataActions
+                      displayData={() => displayData()}
+                      id={tData._id}
+                      deleteFn={() => deleteFn(tData._id)}
+                      deletable
+                      editable
+                    />
+                  </td>
+                )}
+              </tr>
+            );
           })}
-          {hasOptions && <th></th>}
-        </tr>
-        {data.map((tData) => {
-          function displayData(): any {
-            getSelectedRowData(tData);
-          }
-          return (
-            <tr key={tData._id}>
-              <td title={tData.name}>{tData.name}</td>
-              <td title={tData.description}>{tData.description}</td>
-              {hasOptions && (
-                <td className="actionsCol">
-                  <DataActions
-                    displayData={() => displayData()}
-                    id={tData._id}
-                    deleteFn={() => deleteFn(tData._id)}
-                    deletable
-                    editable
-                  />
-                </td>
-              )}
-            </tr>
-          );
-        })}
+        </tbody>
       </table>
     </StyledCustomTable>
   );
